@@ -1,0 +1,30 @@
+module ZombieMeat
+{
+	imports
+	{
+		Base
+	}
+		recipe Butcher
+		{
+			keep [Recipe.GetItemTypes.SharpKnife]/[Recipe.GetItemTypes.DullKnife]/BoneKnife,
+			CorpseMale/CorpseFemale,
+			CanBeDoneFromFloor:true,
+			RemoveResultItem:true,
+			Result:DummyItemZM,
+			NeedToBeLearn:false,
+			Sound:PZ_FoodSwoosh,
+			Time:600.00,
+			Category:Cooking,
+			OnCreate:Butcher,
+		}
+		recipe Create Bone Knife
+    {
+        RottenBone,
+        Result:BoneKnife,
+        Time:10.0,
+        OnCreate:Recipe.OnCreate.CreateSpear,
+        Category:Survivalist,
+        OnGiveXP:Recipe.OnGiveXP.WoodWork5,
+    }
+	
+}
