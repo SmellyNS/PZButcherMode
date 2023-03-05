@@ -1,0 +1,44 @@
+module ZombieMeat {
+	imports {
+		Base
+	} 
+
+	recipe Clean Bone
+    {
+        RottenBone,
+        Water,
+        Result:CleanRottenBone,
+        Time:80.0,
+        Category:Cooking,
+        OnTest:Recipe.OnTest.NotTaintedWater,
+    }
+	recipe Crush bones into flour
+    {
+        CleanRottenBone=6,
+        keep MortarPestle,
+        Result:BoneFlour,
+        Time:800.0,
+        Category:Cooking,
+    }
+	recipe Mix bone flour {
+		BoneFlour = 4,
+		WaterPot = 1,
+		Time:100.00,
+		Category:Cooking,
+		CanBeDoneFromFloor:false,
+		Sound = BoilingFood
+		RemoveResultItem:true,
+		Result:DummyItemZM,
+		OnCreate:onCreateMixBoneFlour,		
+	}
+	recipe Extract glue {
+		keep Spoon,
+		ZombieMeat.GlueInThePot,
+		Time:600.00,
+		Category:Cooking,
+		CanBeDoneFromFloor:false,
+		NeedToBeLearn:false,
+		Result:Glue=2,
+		OnCreate:ExtractGlue,
+	}
+}
