@@ -8,9 +8,8 @@ module ZombieMeat {
 		BakingSoda;1,
 		Time:300.00,
 		Category:Cooking,
-		NoBrokenItems:true
+		NoBrokenItems:true,
 		CanBeDoneFromFloor:false,
-		Sound = BoilingFood
 		NeedToBeLearn:false,
 		RemoveResultItem:true,
 		Result:ZombieMeat.ZMBilletSoap,

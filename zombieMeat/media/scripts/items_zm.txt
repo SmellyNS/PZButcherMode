@@ -41,14 +41,4 @@ item HumanMeat
 		Poison						 = true,
 		WorldStaticModel			 = Steak,
 	}
-	
-	item RottenBone
-	{
-		DisplayCategory = Material,
-		Type = Normal,
-		DisplayName = Rotten bone,
-		Icon = Chopsticks,
-		Weight = 0.3,
-		WorldStaticModel = Chopsticks_Ground,
-	}
 }
