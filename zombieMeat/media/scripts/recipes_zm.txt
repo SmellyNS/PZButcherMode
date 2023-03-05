@@ -6,7 +6,7 @@ module ZombieMeat
 	}
 		recipe Butcher
 		{
-			keep [Recipe.GetItemTypes.SharpKnife]/[Recipe.GetItemTypes.DullKnife]/BoneKnife,
+			keep [Recipe.GetItemTypes.SharpKnife]/[Recipe.GetItemTypes.DullKnife],
 			CorpseMale/CorpseFemale,
 			CanBeDoneFromFloor:true,
 			RemoveResultItem:true,
@@ -15,16 +15,8 @@ module ZombieMeat
 			Sound:PZ_FoodSwoosh,
 			Time:600.00,
 			Category:Cooking,
-			OnCreate:Butcher,
+			OnCreate:onCreateButcher,
+			OnCanPerform:canPerformButcher,
+			OnGiveXP:Recipe.OnGiveXP.Cooking10,
 		}
-		recipe Create Bone Knife
-    {
-        RottenBone,
-        Result:BoneKnife,
-        Time:10.0,
-        OnCreate:Recipe.OnCreate.CreateSpear,
-        Category:Survivalist,
-        OnGiveXP:Recipe.OnGiveXP.WoodWork5,
-    }
-	
 }
