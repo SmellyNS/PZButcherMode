@@ -1,0 +1,33 @@
+module ZombieMeat
+{
+	imports	{
+		Base
+	}
+	item ZMFat {
+		DisplayName = Fat,
+		DisplayCategory = Material,
+		Type = Normal,
+		Weight = 0.1,
+		Icon = Lard,
+		WorldStaticModel = Lard_Ground,
+	}
+	item ZMBilletSoap {
+		DisplayName = Pot with billet for soap,
+		Type = Food,
+		Weight = 7.5,
+		Icon = Pot_Water,
+		MinutesToCook = 30,
+		BadInMicrowave = true,
+		CantEat = TRUE,
+		IsCookable = TRUE,
+		ReplaceOnCooked= ZombieMeat.ZMCookedSoap,
+		WorldStaticModel = CookingPotWater_Ground,
+	}
+	item ZMCookedSoap {
+		DisplayName = Cooked soap,
+		Type = Normal,
+		Weight = 5.0,
+		Icon = PotFull,
+		WorldStaticModel = CookingPotSoup_Ground,
+	}
+}
