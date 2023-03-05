@@ -22,11 +22,10 @@ module ZombieMeat {
     }
 	recipe Mix bone flour {
 		BoneFlour = 4,
-		WaterPot = 1,
+		destroy WaterPot,
 		Time:100.00,
 		Category:Cooking,
 		CanBeDoneFromFloor:false,
-		Sound = BoilingFood
 		RemoveResultItem:true,
 		Result:DummyItemZM,
 		OnCreate:onCreateMixBoneFlour,		
@@ -39,6 +38,6 @@ module ZombieMeat {
 		CanBeDoneFromFloor:false,
 		NeedToBeLearn:false,
 		Result:Glue=2,
-		OnCreate:ExtractGlue,
+		OnCreate:onCreateExtractGlue,
 	}
 }
