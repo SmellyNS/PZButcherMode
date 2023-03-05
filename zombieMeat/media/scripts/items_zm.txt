@@ -51,4 +51,12 @@ item HumanMeat
 		Weight = 0.3,
 		WorldStaticModel = Chopsticks_Ground,
 	}
+	item ZMFat { 
+  DisplayName = Fat, 
+  DisplayCategory = Material, 
+  Type = Normal, 
+  Weight = 0.1, 
+  Icon = Onion, 
+  WorldStaticModel = Onion, 
+ }
 }
