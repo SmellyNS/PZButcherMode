@@ -18,7 +18,7 @@ module ZombieMeat {
 	}
 	recipe Extract soap from the pot {
 		keep Spoon,
-		ZombieMeat.ZMBilletSoap,
+		ZombieMeat.ZMCookedSoap,
 		Prop1:Spoon,
 		Time:300.00,
 		Category:Cooking,
