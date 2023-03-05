@@ -1,0 +1,30 @@
+module ZombieMeat {
+	imports {
+		Base
+	} 
+	recipe Create pot of billet for soap {
+		ZombieMeat.ZMFat = 25,
+		WaterPot = 1,
+		BakingSoda;1,
+		Time:300.00,
+		Category:Cooking,
+		NoBrokenItems:true
+		CanBeDoneFromFloor:false,
+		Sound = BoilingFood
+		NeedToBeLearn:false,
+		RemoveResultItem:true,
+		Result:ZombieMeat.ZMBilletSoap,
+		OnCreate:CreateBilletSoap,		
+	}
+	recipe Extract soap from the pot {
+		keep Spoon,
+		ZombieMeat.ZMBilletSoap,
+		Prop1:Spoon,
+		Time:300.00,
+		Category:Cooking,
+		CanBeDoneFromFloor:false,
+		NeedToBeLearn:false,
+		Result:Soap2=2,
+		OnCreate:ExtractSoapFromThePot,
+	}
+}
