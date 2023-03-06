@@ -30,4 +30,32 @@ module ZombieMeat
 		Icon = PotFull,
 		WorldStaticModel = CookingPotSoup_Ground,
 	}
+	item ZMPreparedFat {
+		DisplayName = Prepared fat for candles,
+		Type = Food,
+		Weight = 2.5,
+		Icon = SaucepanEmpty,
+		MinutesToCook = 15,
+		BadInMicrowave = true,
+		CantEat = TRUE,
+		IsCookable = TRUE,
+		WorldStaticModel = WaterSaucepan,
+	}
+	item ZMBilletCandles {
+		DisplayName = Billet for candles,
+		Type = Food,
+		Weight = 2.5,
+		CantEat = TRUE,
+		IsCookable = FALSE,
+		ReplaceOnRotten = ZombieMeat.CandlesTray,
+		Icon=MuffinTray_Batter,
+		WorldStaticModel=MuffinTray_Batter,
+	}
+	item ZMCandlesTray {
+		DisplayName = Created candles in tray,
+		Type = Normal,
+		Weight = 2.0,
+		Icon=Muffintray_Batter,
+		WorldStaticModel=MuffinTray_Batter,
+	}
 }
