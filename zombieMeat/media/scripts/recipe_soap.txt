@@ -4,16 +4,16 @@ module ZombieMeat {
 	} 
 	recipe Create pot of billet for soap {
 		ZombieMeat.ZMFat = 25,
-		Destroy WaterPot;25,
-		BakingSoda;1,
+		destroy WaterPot,
+		BakingSoda,
 		Time:300.00,
 		Category:Cooking,
 		NoBrokenItems:true,
 		CanBeDoneFromFloor:false,
 		NeedToBeLearn:false,
+		OnCreate:CreateBilletSoap,
 		RemoveResultItem:true,
-		Result:ZombieMeat.ZMBilletSoap,
-		OnCreate:CreateBilletSoap,		
+		Result:ZombieMeat.ZMBilletSoap,		
 	}
 	recipe Extract soap from the pot {
 		keep Spoon,
@@ -28,7 +28,7 @@ module ZombieMeat {
 	}
 	recipe Create prepared fat for candles {
 		ZombieMeat.ZMFat=6,
-		destroy WaterSaucepan;25,
+		destroy WaterSaucepan,
 		Time:150.00,
 		Category:Cooking,
 		CanBeDoneFromFloor:false,
@@ -37,25 +37,28 @@ module ZombieMeat {
 		Result:ZombieMeat.ZMPreparedFat,
 	}
 	recipe Create billet for candles {
-		Thread=1,
+		Thread=6,
 		ZombieMeat.ZMPreparedFat,
 		MuffinTray,
 		Time:150.00,
 		Category:Cooking,
+		NeedToBeLearn:false,
+		OnTest:Recipe.OnTest.FatIsCooked,
 		CanBeDoneFromFloor:false,
-		OnTest:OnTestIsHeat,
-		OnCreate:CreatePreparedFat,
+		OnCreate:CreateBilletCandles,
 		RemoveResultItem:true,
 		Result:ZombieMeat.ZMBilletCandles,
 	}
 	recipe Extract candles from the tray {
+		keep Spoon,
 		ZombieMeat.ZMBilletCandles,
 		Time:100.00,
 		Category:Cooking,
 		CanBeDoneFromFloor:false,
 		NeedToBeLearn:false,
-		Result:Candle=6,
+		OnTest:Recipe.OnTest.CandelsIsFresh,
 		OnCreate:ExtractCandlesFromTheTray,
+		Result:Candle=6,
 	}
 
 }
