@@ -1,0 +1,133 @@
+module ZombieButcher
+{
+	imports
+	{
+		Base
+	}
+	
+	recipe Butcher
+	{
+		keep [Recipe.GetItemTypes.SharpKnife]/[Recipe.GetItemTypes.DullKnife],
+		CorpseMale/CorpseFemale,
+		CanBeDoneFromFloor:true,
+		RemoveResultItem:true,
+		Result:ZombieButcher.HumanMeat,
+		NeedToBeLearn:false,
+		Sound:PZ_FoodSwoosh,
+		Time:600.00,
+		Category:Cooking,
+		OnCreate:Recipe.OnCreate.Butcher,
+		OnCanPerform:Recipe.OnCanPerform.Butcher,
+		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+	}
+	
+	recipe Clean Bone
+    {
+        RottenBone,
+        Water,
+        Result:CleanRottenBone,
+        Time:80.0,
+        Category:Cooking,
+        OnTest:Recipe.OnTest.NotTaintedWater,
+    }
+	
+	recipe Crush bones into flour
+    {
+        CleanRottenBone=6,
+        keep MortarPestle,
+        Result:BoneFlour,
+        Time:800.0,
+        Category:Cooking,
+    }
+	
+	recipe Mix bone flour {
+		BoneFlour = 4,
+		destroy WaterPot,
+		Time:100.00,
+		Category:Cooking,
+		CanBeDoneFromFloor:false,
+		RemoveResultItem:true,
+		Result:MixedBoneFlour,
+		OnCreate:Recipe.OnCreate.MixBoneFlour,		
+	}
+	
+	recipe Extract glue {
+		keep Spoon,
+		ZombieButcher.GlueInThePot,
+		Time:600.00,
+		Category:Cooking,
+		CanBeDoneFromFloor:false,
+		NeedToBeLearn:false,
+		Result:Glue=2,
+		OnCreate:Recipe.OnCreate.ExtractGlue,
+	}
+	
+	recipe Create pot of billet for soap 
+	{
+		ZombieButcher.Fat = 25,
+		destroy WaterPot,
+		BakingSoda,
+		Time:300.00,
+		Category:Cooking,
+		NoBrokenItems:true,
+		CanBeDoneFromFloor:false,
+		NeedToBeLearn:false,
+		OnCreate:Recipe.OnCreate.CreateBilletSoap,
+		RemoveResultItem:true,
+		Result:ZombieButcher.BilletSoap,		
+	}
+	
+	recipe Extract soap from the pot 
+	{
+		keep Spoon,
+		ZombieButcher.CookedSoap,
+		Prop1:Spoon,
+		Time:300.00,
+		Category:Cooking,
+		CanBeDoneFromFloor:false,
+		NeedToBeLearn:false,
+		Result:Soap2=2,
+		OnCreate:Recipe.OnCreate.ExtractSoapFromThePot,
+	}
+	
+	recipe Create prepared fat for candles 
+	{
+		ZombieButcher.Fat=6,
+		destroy WaterSaucepan,
+		Time:150.00,
+		Category:Cooking,
+		CanBeDoneFromFloor:false,
+		OnCreate:Recipe.OnCreate.PreparedFat,
+		RemoveResultItem:true,
+		Result:ZombieButcher.PreparedFat,
+	}
+	
+	recipe Create billet for candles 
+	{
+		Thread=6,
+		ZombieButcher.PreparedFat,
+		MuffinTray,
+		Time:150.00,
+		Category:Cooking,
+		NeedToBeLearn:false,
+		OnTest:Recipe.OnTest.FatIsCooked,
+		CanBeDoneFromFloor:false,
+		OnCreate:Recipe.OnCreate.BilletCandles,
+		RemoveResultItem:true,
+		Result:ZombieButcher.BilletCandles,
+	}
+	
+	recipe Extract candles from the tray 
+	{
+		keep Spoon,
+		ZombieButcher.BilletCandles,
+		Time:100.00,
+		Category:Cooking,
+		CanBeDoneFromFloor:false,
+		NeedToBeLearn:false,
+		OnTest:Recipe.OnTest.CandelsIsFresh,
+		OnCreate:Recipe.OnCreate.ExtractCandlesFromTheTray,
+		Result:Candle=6,
+	}
+	
+}

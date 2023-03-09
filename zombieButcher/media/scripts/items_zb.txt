@@ -1,0 +1,145 @@
+module ZombieButcher
+{
+	imports
+	{
+		Base
+	}
+
+	item HumanMeat
+	{
+		DisplayName = Human meat,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.2,
+		Icon = Steak,
+		BadCold	= true,
+		BadInMicrowave = true,
+		DangerousUncooked = TRUE,
+		EvolvedRecipe = Pizza:20;Stew:20;Stir fry Griddle Pan:20;Stir fry:20;Sandwich:5|Cooked;Sandwich Baguette:5|Cooked;Salad:10|Cooked;Roasted Vegetables:20;PastaPot:20;PastaPan:20;RicePot:20;RicePan:20;Taco:20|Cooked;Burrito:20|Cooked,
+		FoodType = Beef,
+		GoodHot = true,
+		IsCookable = TRUE,
+		MinutesToCook = 20,
+		MinutesToBurn = 50,
+		DaysFresh = 0,
+		DaysTotallyRotten = 1,
+		HungerChange = -20,
+		Calories = 150,
+		Carbohydrates = 0,
+		Lipids = 7.35,
+		Proteins = 26.62,
+		PoisonPower = 30,
+		Poison = true,
+		WorldStaticModel = Steak,
+	}
+	
+	item RottenBone
+	{
+		DisplayCategory = Material,
+		Type = Normal,
+		DisplayName = Rotten bone,
+		Icon = Chopsticks,
+		Weight = 0.3,
+		WorldStaticModel = Chopsticks_Ground,
+	}
+
+	item CleanRottenBone
+	{
+		DisplayCategory = Material,
+		Type = Normal,
+		DisplayName = Rotten bone (clean),
+		Icon = Drumsticks,
+		Weight = 0.3,
+		WorldStaticModel = Chopsticks_Ground,
+	}
+	
+	item BoneFlour
+	{
+		DisplayCategory = Material,
+		Type = Normal,
+		DisplayName = Bone Flour,
+		Icon = Tissue,
+		Weight = 0.2,
+		WorldStaticModel = Tissue,
+	}
+	
+	item MixedBoneFlour {
+		DisplayName = Mixed bone flour,
+		Type = Food,
+		Weight = 7.5,
+		Icon = Pot_Water,
+		MinutesToCook = 120,
+		BadInMicrowave = true,
+		CantEat = TRUE,
+		IsCookable = TRUE,
+		ReplaceOnCooked= ZombieButcher.GlueInThePot,
+		WorldStaticModel = CookingPotWater_Ground,
+	}
+	
+	item GlueInThePot {
+		DisplayName = Glue in the pot,
+		Type = Normal,
+		Weight = 3.0,
+		Icon = PotFull,
+		WorldStaticModel = CookingPotSoup_Ground,
+	}
+	
+	item Fat 
+	{
+		DisplayName = Fat,
+		DisplayCategory = Material,
+		Type = Normal,
+		Weight = 0.1,
+		Icon = Lard,
+		WorldStaticModel = Lard_Ground,
+	}
+	
+	item BilletSoap 
+	{
+		DisplayName = Pot with billet for soap,
+		Type = Food,
+		Weight = 5.0,
+		Icon = Pot_Water,
+		MinutesToCook = 30,
+		BadInMicrowave = true,
+		CantEat = TRUE,
+		IsCookable = TRUE,
+		ReplaceOnCooked= ZombieButcher.CookedSoap,
+		WorldStaticModel = CookingPotWater_Ground,
+	}
+	
+	item CookedSoap 
+	{
+		DisplayName = Cooked soap,
+		Type = Normal,
+		Weight = 3.0,
+		Icon = PotFull,
+		WorldStaticModel = CookingPotSoup_Ground,
+	}
+	
+	item PreparedFat 
+	{
+		DisplayName = Prepared fat for candles,
+		Type = Food,
+		Weight = 2.5,
+		Icon = SaucepanEmpty,
+		MinutesToCook = 15,
+		BadInMicrowave = true,
+		CantEat = TRUE,
+		IsCookable = TRUE,
+		WorldStaticModel = WaterSaucepan,
+	}
+	
+	item BilletCandles 
+	{
+		DisplayName = Billet for candles,
+		Type = Food,
+		Weight = 2.0,
+		CantEat = FALSE,
+		IsCookable = FALSE,
+		DaysFresh = 1,
+		DaysTotallyRotten = 1,
+		Icon = Muffintray_Batter,
+		WorldStaticModel = Muffintray_Batter,
+	}
+}
