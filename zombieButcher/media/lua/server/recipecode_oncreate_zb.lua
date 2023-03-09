@@ -1,15 +1,19 @@
-local function addFinalResult(player, typeOfResult)
+local function addFinalButcherResult(player, typeOfResult, chanse)
 	local inv = player:getInventory();
-	local perkLevel = player:getPerkLevel(Perks.Cooking);
-	for i = 0, perkLevel do
-		inv:AddItem(typeOfResult);
+	local perkLevel = player:getPerkLevel(Perks.Cooking) + player:getPerkLevel(Perks.SmallBlade);
+	chanse = chanse + perkLevel * 2;
+	for i = 1, 10 do
+		rnd = ZombRand(1, 100)
+		if rnd <= chanse then
+			inv:AddItem(typeOfResult);
+		end;
 	end
 end
 
 function Recipe.OnCreate.Butcher(items, result, player)
-	addFinalResult(player, "ZombieButcher.HumanMeat")
-	addFinalResult(player, "ZombieButcher.Fat")
-	addFinalResult(player, "ZombieButcher.RottenBone")
+	addFinalButcherResult(player, "ZombieButcher.HumanMeat", 30)
+	addFinalButcherResult(player, "ZombieButcher.Fat", 35)
+	addFinalButcherResult(player, "ZombieButcher.RottenBone", 35)
 	
 	player:getStats():setEndurance(player:getStats():getEndurance() - 0.2)
 	player:getStats():setStress(player:getStats():getStress() + 0.2)

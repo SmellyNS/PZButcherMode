@@ -18,7 +18,7 @@ module ZombieButcher
 		Category:Cooking,
 		OnCreate:Recipe.OnCreate.Butcher,
 		OnCanPerform:Recipe.OnCanPerform.Butcher,
-		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+		OnGiveXP:Recipe.OnGiveXP.Cooking3,
 	}
 	
 	recipe Clean Bone
