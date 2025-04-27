@@ -1,133 +1,180 @@
 module ZombieButcher
 {
-	imports
-	{
-		Base
-	}
-	
-	recipe Butcher
-	{
-		keep [Recipe.GetItemTypes.SharpKnife]/[Recipe.GetItemTypes.DullKnife],
-		CorpseMale/CorpseFemale,
-		CanBeDoneFromFloor:true,
-		RemoveResultItem:true,
-		Result:ZombieButcher.HumanMeat,
-		NeedToBeLearn:false,
-		Sound:PZ_FoodSwoosh,
-		Time:600.00,
-		Category:Cooking,
-		OnCreate:Recipe.OnCreate.Butcher,
-		OnCanPerform:Recipe.OnCanPerform.Butcher,
-		OnGiveXP:Recipe.OnGiveXP.Cooking3,
-	}
-	
-	recipe Clean Bone
+    imports
     {
-        RottenBone,
-        Water,
-        Result:CleanRottenBone,
-        Time:80.0,
-        Category:Cooking,
-        OnTest:Recipe.OnTest.NotTaintedWater,
+        Base
     }
-	
-	recipe Crush bones into flour
+
+    craftRecipe ButcherZombie
     {
-        CleanRottenBone=6,
-        keep MortarPestle,
-        Result:BoneFlour,
-        Time:800.0,
-        Category:Cooking,
+        timedAction = SliceMeat_Surface,
+        time = 600,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Butchering:10,
+        inputs
+        {
+            item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+            item 1 [Base.CorpseMale;Base.CorpseFemale] flags[InheritFoodAge;ItemCount],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.HumanMeat,
+        }
+        OnCreate = Recipe.OnCreate.Butcher,
+        OnCanPerform = Recipe.OnCanPerform.Butcher
     }
-	
-	recipe Mix bone flour {
-		BoneFlour = 4,
-		destroy WaterPot,
-		Time:100.00,
-		Category:Cooking,
-		CanBeDoneFromFloor:false,
-		RemoveResultItem:true,
-		Result:MixedBoneFlour,
-		OnCreate:Recipe.OnCreate.MixBoneFlour,		
-	}
-	
-	recipe Extract glue {
-		keep Spoon,
-		ZombieButcher.GlueInThePot,
-		Time:600.00,
-		Category:Cooking,
-		CanBeDoneFromFloor:false,
-		NeedToBeLearn:false,
-		Result:Glue=2,
-		OnCreate:Recipe.OnCreate.ExtractGlue,
-	}
-	
-	recipe Create pot of billet for soap 
-	{
-		ZombieButcher.Fat = 25,
-		destroy WaterPot,
-		BakingSoda,
-		Time:300.00,
-		Category:Cooking,
-		NoBrokenItems:true,
-		CanBeDoneFromFloor:false,
-		NeedToBeLearn:false,
-		OnCreate:Recipe.OnCreate.CreateBilletSoap,
-		RemoveResultItem:true,
-		Result:ZombieButcher.BilletSoap,		
-	}
-	
-	recipe Extract soap from the pot 
-	{
-		keep Spoon,
-		ZombieButcher.CookedSoap,
-		Prop1:Spoon,
-		Time:300.00,
-		Category:Cooking,
-		CanBeDoneFromFloor:false,
-		NeedToBeLearn:false,
-		Result:Soap2=2,
-		OnCreate:Recipe.OnCreate.ExtractSoapFromThePot,
-	}
-	
-	recipe Create prepared fat for candles 
-	{
-		ZombieButcher.Fat=6,
-		destroy WaterSaucepan,
-		Time:150.00,
-		Category:Cooking,
-		CanBeDoneFromFloor:false,
-		OnCreate:Recipe.OnCreate.PreparedFat,
-		RemoveResultItem:true,
-		Result:ZombieButcher.PreparedFat,
-	}
-	
-	recipe Create billet for candles 
-	{
-		Thread=6,
-		ZombieButcher.PreparedFat,
-		MuffinTray,
-		Time:150.00,
-		Category:Cooking,
-		NeedToBeLearn:false,
-		OnTest:Recipe.OnTest.FatIsCooked,
-		CanBeDoneFromFloor:false,
-		OnCreate:Recipe.OnCreate.BilletCandles,
-		RemoveResultItem:true,
-		Result:ZombieButcher.BilletCandles,
-	}
-	
-	recipe Extract candles from the tray 
-	{
-		keep Spoon,
-		ZombieButcher.BilletCandles,
-		Time:100.00,
-		Category:Cooking,
-		CanBeDoneFromFloor:false,
-		NeedToBeLearn:false,
-		OnTest:Recipe.OnTest.CandelsIsFresh,
-		OnCreate:Recipe.OnCreate.ExtractCandlesFromTheTray,
-		Result:Candle=6,
-	}
-	
+
+    craftRecipe CrushBonePiecesIntoFlour
+    {
+        timedAction = Making,
+        time = 800,
+        Tags = AnySurfaceCraft,
+        category = Cooking,
+        inputs
+        {
+            item 10 [Base.SmallAnimalBone], /* Примечание: Убедитесь, что Base.SmallAnimalBone определён в items.txt */
+            item 1 [Base.MortarPestle] mode:keep flags[NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.BoneFlour,
+        }
+        OnCreate = Recipe.OnCreate.CrushBones
+    }
+
+    craftRecipe MixBoneFlour
+    {
+        timedAction = Making,
+        time = 100,
+        Tags = InHandCraft,
+        category = Cooking,
+        inputs
+        {
+            item 4 [ZombieButcher.BoneFlour],
+            item 1 [Base.Pot] mode:destroy flags[NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.MixedBoneFlour,
+        }
+        OnCreate = Recipe.OnCreate.MixBoneFlour
+    }
+
+    craftRecipe ExtractGlue
+    {
+        timedAction = Making,
+        time = 600,
+        Tags = InHandCraft,
+        category = Cooking,
+        needTobeLearn = false,
+        inputs
+        {
+            item 1 [Base.Spoon] mode:keep flags[NoBrokenItems],
+            item 1 [ZombieButcher.GlueInThePot],
+        }
+        outputs
+        {
+            item 1 Base.Glue,
+        }
+        OnCreate = Recipe.OnCreate.ExtractGlue
+    }
+
+    craftRecipe CreatePotOfBilletForSoap
+    {
+        timedAction = Making,
+        time = 300,
+        Tags = InHandCraft,
+        category = Cooking,
+        needTobeLearn = false,
+        inputs
+        {
+            item 25 [ZombieButcher.Fat],
+            item 1 [Base.Pot] mode:destroy flags[NoBrokenItems],
+            item 1 [Base.BakingSoda] flags[NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.BilletSoap,
+        }
+        OnCreate = Recipe.OnCreate.CreateBilletSoap
+    }
+
+    craftRecipe ExtractSoapFromThePot
+    {
+        timedAction = Making,
+        time = 300,
+        Tags = InHandCraft,
+        category = Cooking,
+        needTobeLearn = false,
+        inputs
+        {
+            item 1 [Base.Spoon] mode:keep flags[NoBrokenItems],
+            item 1 [ZombieButcher.CookedSoap],
+        }
+        outputs
+        {
+            item 1 Base.Soap2,
+        }
+        OnCreate = Recipe.OnCreate.ExtractSoapFromThePot
+    }
+
+    craftRecipe CreatePreparedFatForCandles
+    {
+        timedAction = Making,
+        time = 150,
+        Tags = InHandCraft,
+        category = Cooking,
+        inputs
+        {
+            item 6 [ZombieButcher.Fat],
+            item 1 [Base.Saucepan] mode:destroy flags[NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.PreparedFat,
+        }
+        OnCreate = Recipe.OnCreate.PreparedFat
+    }
+
+    craftRecipe CreateBilletForCandles
+    {
+        timedAction = Making,
+        time = 150,
+        Tags = InHandCraft,
+        category = Cooking,
+        needTobeLearn = false,
+        inputs
+        {
+            item 6 [Base.Thread],
+            item 1 [ZombieButcher.PreparedFat],
+            item 1 [Base.MuffinTray] mode:keep flags[NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.BilletCandles,
+        }
+        OnTest = Recipe.OnTest.FatIsCooked,
+        OnCreate = Recipe.OnCreate.BilletCandles
+    }
+
+    craftRecipe ExtractCandlesFromTheTray
+    {
+        timedAction = Making,
+        time = 100,
+        Tags = InHandCraft,
+        category = Cooking,
+        needTobeLearn = false,
+        inputs
+        {
+            item 1 [Base.Spoon] mode:keep flags[NoBrokenItems],
+            item 1 [ZombieButcher.BilletCandles],
+        }
+        outputs
+        {
+            item 1 Base.Candle,
+        }
+        OnTest = Recipe.OnTest.CandlesIsFresh,
+        OnCreate = Recipe.OnCreate.ExtractCandlesFromTheTray
+    }
 }

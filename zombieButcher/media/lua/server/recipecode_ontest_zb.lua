@@ -1,13 +1,13 @@
-function Recipe.OnTest.CandelsIsFresh(item)
-    if instanceof(item, "Food") then
-    return not item:isFresh()
+function Recipe.OnTest.CandlesIsFresh(item)
+    if item and item:IsFood() then
+        return not item:isFresh()
     end
     return true
 end
 
 function Recipe.OnTest.FatIsCooked(item)
-    if instanceof(item, "Food") then
-    return item:isCooked()
+    if item and item:IsFood() then
+        return item:isCooked()
     end
     return true
 end
