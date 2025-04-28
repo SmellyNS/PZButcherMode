@@ -41,21 +41,27 @@ local function addButcherZombieOption(player, context, worldObjects, test)
     if not corpse then
         local deadBodies3 = getWorld()
         local deadBodies2 = deadBodies3:getCell()
-        local deadBodies = deadBodies2:getObjectList()
+        local x, y, z = playerObj:getX(), playerObj:getY(), playerObj:getZ()
+        local deadBodies1 = deadBodies2:getGridSquare(x,y,z)
+        local deadBodies = deadBodies1:getDeadBodys()
+
         if deadBodies then
-            local px, py, pz = playerObj:getX(), playerObj:getY(), playerObj:getZ()
             print("ZombieButcher: Checking ", deadBodies:size(), " objects in world")
             for i = 0, deadBodies:size() - 1 do
                 local body = deadBodies:get(i)
                 print("There is a possible dead body: ", body)
-                if body and instanceof(body, "IsoDeadBody") then
-                    local bx, by, bz = body:getX(), body:getY(), body:getZ()
-                    local dist = math.sqrt((px - bx)^2 + (py - by)^2)
-                    print("ZombieButcher: DeadBody[" .. i .. "] at ", bx, ", ", by, ", ", bz, ", distance = ", dist)
-                    if dist < 2 and bz == pz then
+                if instanceof(body, "IsoDeadBody") then
+                    print("ZombieButcher: Found IsoDeadBody. Checking if its human-like")
+                    print("isZombie = ", body:isZombie())
+                    print("isSkeleton = ", body:isSkeleton())
+                    print("isPlayer = ", body:isPlayer())
+                    local condition = body:isZombie() or body:isSkeleton() or body:isPlayer()
+                    print("isZombie = ", body:isZombie())
+                    print("isSkeleton = ", body:isSkeleton())
+                    print("isPlayer = ", body:isPlayer())
+                    if condition then
+                        print("This is THE body! ")
                         corpse = body
-                        print("ZombieButcher: Found IsoDeadBody in world DeadBodies")
-                        break
                     end
                 end
             end
