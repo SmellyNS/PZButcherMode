@@ -167,8 +167,6 @@ function ISButcherZombieAction:perform()
         self.character:Say(phrase)
     end
 
-
-    self.character:Say("I butchered the corpse.")
     local square = self.corpse:getSquare()
     if square and instanceof(self.corpse, "IsoDeadBody") then
         square:removeCorpse(self.corpse, false)
