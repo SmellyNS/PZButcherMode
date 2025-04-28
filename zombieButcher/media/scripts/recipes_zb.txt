@@ -70,12 +70,13 @@ module ZombieButcher
         needTobeLearn = false,
         inputs
         {
-            item 1 [Base.Spoon] mode:keep flags[NoBrokenItems],
+            item 1 [Base.Spoon;Base.Spoon_Bone;Base.Spoon_Gold;Base.Spoon_Silver;Base.SpoonForged;Base.WoodenSpoon] mode:keep flags[NoBrokenItems],
             item 1 [ZombieButcher.GlueInThePot],
         }
         outputs
         {
             item 1 Base.Glue,
+            item 1 Base.Pot,
         }
         OnCreate = Recipe.OnCreate.ExtractGlue
     }
@@ -109,12 +110,13 @@ module ZombieButcher
         needTobeLearn = false,
         inputs
         {
-            item 1 [Base.Spoon] mode:keep flags[NoBrokenItems],
+            item 1 [Base.Spoon;Base.Spoon_Bone;Base.Spoon_Gold;Base.Spoon_Silver;Base.SpoonForged;Base.WoodenSpoon] mode:keep flags[NoBrokenItems],
             item 1 [ZombieButcher.CookedSoap],
         }
         outputs
         {
             item 1 Base.Soap2,
+            item 1 Base.Pot,
         }
         OnCreate = Recipe.OnCreate.ExtractSoapFromThePot
     }
@@ -153,6 +155,7 @@ module ZombieButcher
         outputs
         {
             item 1 ZombieButcher.BilletCandles,
+            item 1 Base.Saucepan,
         }
         OnTest = Recipe.OnTest.FatIsCooked,
         OnCreate = Recipe.OnCreate.BilletCandles
@@ -172,7 +175,8 @@ module ZombieButcher
         }
         outputs
         {
-            item 1 Base.Candle,
+            item 6 Base.Candle,
+            item 1 Base.MuffinTray,
         }
         OnTest = Recipe.OnTest.CandlesIsFresh,
         OnCreate = Recipe.OnCreate.ExtractCandlesFromTheTray

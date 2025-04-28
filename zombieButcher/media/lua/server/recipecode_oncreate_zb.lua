@@ -1,19 +1,19 @@
 local function addFinalButcherResult(player, itemType, baseChance, minCount, maxCount)
 	local inv = player:getInventory()
-	local trappingLevel = player:getPerkLevel(Perks.Trapping)
+	local butcheringLevel = player:getPerkLevel(Perks.Butchering)
 
-	-- Увеличиваем количество или шанс в зависимости от перка Trapping
+	-- Увеличиваем количество или шанс в зависимости от перка butchering
 	if minCount and maxCount then
 		-- Для мяса, жира и маленьких костей: случайное количество
-		local extraCount = math.floor(trappingLevel / (itemType == "ZombieButcher.HumanMeat" and 2 or 3))
+		local extraCount = math.floor(butcheringLevel / (itemType == "ZombieButcher.HumanMeat" and 2 or 3))
 		local count = ZombRand(minCount, maxCount + extraCount + 1)
 		for i = 1, count do
 			inv:AddItem(itemType)
 		end
 	else
 		-- Для больших костей, челюсти и черепа: шанс появления
-		local chance = baseChance + (itemType == "Base.LargeAnimalBone" and trappingLevel * 5 or
-				itemType == "Base.JawboneBovide" and trappingLevel * 3)
+		local chance = baseChance + (itemType == "Base.LargeAnimalBone" and butcheringLevel * 5 or
+				itemType == "Base.JawboneBovide" and butcheringLevel * 3)
 		if ZombRand(1, 100) <= chance then
 			inv:AddItem(itemType)
 		end
@@ -37,11 +37,11 @@ function Recipe.OnCreate.Butcher(items, result, player)
 	addFinalButcherResult(player, "Base.JawboneBovide", 5)
 
 	-- Увеличиваем стресс и усталость
-	player:getStats():setStress(player:getStats():getStress() + 0.2 + 0.02*player:getPerkLevel(Perks.Trapping))
-	player:getStats():setEndurance(player:getStats():getEndurance() - 0.2 + 0.01*player:getPerkLevel(Perks.Trapping))
+	player:getStats():setStress(player:getStats():getStress() + 0.2 + 0.02*player:getPerkLevel(Perks.Butchering))
+	player:getStats():setEndurance(player:getStats():getEndurance() - 0.2 + 0.01*player:getPerkLevel(Perks.Butchering))
 
 	-- Шанс тошноты (50% на уровне 0, уменьшается до 0% на уровне 10)
-	local nauseaChance = 50 - player:getPerkLevel(Perks.Trapping) * 5
+	local nauseaChance = 50 - player:getPerkLevel(Perks.Butchering) * 5
 	if ZombRand(1, 100) <= nauseaChance then
 		player:getBodyDamage():setUnhappynessLevel(player:getBodyDamage():getUnhappynessLevel() + 20)
 		player:Say("Ugh, this is disgusting...")

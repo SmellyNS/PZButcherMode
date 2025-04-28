@@ -104,24 +104,21 @@ module ZombieButcher
     DisplayName = Prepared Fat for Candles,
     Type = Food,
     Weight = 2.5,
-    Icon = Saucepan_Water, /* Обновлено для соответствия новым иконкам */
+    Icon = SaucepanFilled, /* Обновлено для соответствия новым иконкам */
     MinutesToCook = 15,
     BadInMicrowave = true,
     CantBeEaten = true,
     IsCookable = true,
-    WorldStaticModel = SaucepanWater_Ground, /* Обновлено */
+	StaticModel = WaterSaucepanPasta,
+    WorldStaticModel = WaterSaucepanPasta, /* Обновлено */
   }
 
   item BilletCandles
   {
     DisplayName = Billet for Candles,
-    Type = Food,
+    Type = Normal,
     Weight = 2.0,
-    CantBeEaten = false,      /* Заменено CantEat */
-    IsCookable = false,
-    DaysFresh = 1,
-    DaysTotallyRotten = 1,
-    Icon = MuffinTray_Batter, /* Обновлено для соответствия новым иконкам */
-    WorldStaticModel = MuffinTray_Batter_Ground,
+    Icon = Muffintray_Batter, /* Обновлено для соответствия новым иконкам */
+    WorldStaticModel = Muffintray_Batter,
   }
 }

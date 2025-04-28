@@ -87,7 +87,7 @@ local function addButcherZombieOption(player, context, worldObjects, test)
         print("DO I HAVE A TOOL? ",hasTool)
 
         if hasTool then
-            context:addOption(getText("ContextMenu_ButcherZombie"), corpse, onButcherZombie, playerObj)
+            context:addOption(getText("Butcher human corpse"), corpse, onButcherZombie, playerObj)
         end
     end
 end
